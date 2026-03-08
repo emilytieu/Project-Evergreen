@@ -7,8 +7,10 @@
 }
 body{
   background: #ffffff;
+  padding: 40px 20px;
 }
 
+/* #region Nav Links */
 .nav-links{
   display: flex;
   align-items: center;
@@ -64,4 +66,22 @@ body{
 .nav-links li.forward a:hover:before{
   transform: scaleX(1);
   transform-origin: left;
+}
+/* #endregion */
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.container img{
+  max-width: 50%;
+  height: auto;
+}
+
+.text-content {
+  flex-grow: 1;
 }

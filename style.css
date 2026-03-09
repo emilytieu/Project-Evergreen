@@ -22,7 +22,10 @@ header{
   flex-direction: column;
   padding-top: 40px;
 }
-
+ul{
+  margin-top: 5px;
+  margin-left: 20px;
+}
 /* #region Nav Links */
 .logo{
   font-size:12px;
@@ -34,7 +37,6 @@ header{
   align-items: center;
   justify-content: space-between;
   background: #aaceed;
-  opacity: 50%;
   width: 100%;
   height: 40px;
   position: fixed;
@@ -97,14 +99,11 @@ header{
 }
 /* #endregion */
 
-
 /* #region container */
 .container{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  gap: 20px;
   min-height: 100svh;
   width: 100%;
   background: #aaceed
@@ -114,18 +113,23 @@ header{
   width: 50%;
   height: auto;
   flex-shrink: 0;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .text-content {
   flex-grow: 1;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 /* #endregion */
 
 .section{
   width: 100%;
   min-height: 100svh;
-  padding: 20px;
+  padding: 60px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-self: start;
 }

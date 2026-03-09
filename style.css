@@ -20,7 +20,7 @@ header{
   align-items: center; 
   text-align: center;
   flex-direction: column;
-  padding-top: 40px;
+  padding: 40px;
 }
 ul{
   margin-top: 5px;

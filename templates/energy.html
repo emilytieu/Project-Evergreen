@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Energy Consumption</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+
+<body>
+    <div class="chart-container">
+        <h1 class="slide-in slide-in-up">Energy Consumption by Country</h1>
+        <canvas id="energyChart"></canvas>
+    </div>
+</body>
+</html>

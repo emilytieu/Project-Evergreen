@@ -134,6 +134,22 @@ ul{
   justify-self: start;
 }
 
+button{
+  display: inline-block;
+  padding: 12px 24px;
+  background: #181749;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+button:active {
+  transform: scale(0.9);
+}
+
 /* #region Slide In Animations */
 .slide-in{
   opacity: 0;
@@ -157,3 +173,12 @@ ul{
 .slide-in:nth-child(3){ transition-delay: .2s; }
 .slide-in:nth-child(4){ transition-delay: .3s; }
 /* #endregion */
+
+.chart-container {
+  width: 400px;
+  height: 200px;
+  margin: 0 auto;
+  padding: 100px;
+  align-content: center;
+  justify-content: center;
+}

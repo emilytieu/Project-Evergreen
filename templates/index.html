@@ -10,8 +10,8 @@
             max-width: 100%;
         }
     </style>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="../static/script.js" defer></script>
 </head>
 <body>
     <div class="nav">
@@ -29,6 +29,9 @@
         <h1 class="slide-in slide-in-up"> What is Green Hydrogen?</h1>
         <p class="slide-in slide-in-up">Green hydrogen is hydrogen gas produced by using electricity from renewable resources to split water into 
             hydrogen and oxygen in a process called electrolysis.</p>
+        <a href="{{ url_for('energy') }}">
+            <button>View Energy Consumption</button>
+        </a>
     </header>
 
     <div class="section">

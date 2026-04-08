@@ -14,6 +14,7 @@
     <script src="../static/script.js" defer></script>
 </head>
 <body>
+<!-- Navigation -->
     <div class="nav">
         <div class="logo"> Project Evergreen </div>
         <ul class="nav-links">
@@ -26,14 +27,41 @@
     </div>
 
     <header>
-        <h1 class="slide-in slide-in-up"> What is Green Hydrogen?</h1>
+        <p class="hero-eyebrow">Clean Energy · Education · Open Data</p>
+        <h1 class="slide-in slide-in-up"> What is <em>Green Hydrogen</em>?</h1>
         <p class="slide-in slide-in-up">Green hydrogen is hydrogen gas produced by using electricity from renewable resources to split water into 
             hydrogen and oxygen in a process called electrolysis.</p>
-        <a href="{{ url_for('energy') }}">
-            <button>View Energy Consumption</button>
-        </a>
+        <div class="hero-btns">
+            <a href="{{ url_for('energy') }}">
+                <button class="btn-primary">View Energy Consumption</button>
+            </a>
+            <a href="{{ url_for('index') }}">
+                <button class="btn-ghost">Read Articles</button>
+            </a>
+        </div>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-arrow"></div>
+        </div>
     </header>
 
+<!-- Stats bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-num">~$1<span style="font-size:1.2rem">/kg</span></div>
+            <div class="stat-label">Target production cost by 2030<br>(currently ~$5–6/kg)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">800 Mt</div>
+            <div class="stat-label">Annual CO₂ that green hydrogen<br>could potentially eliminate</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">70%+</div>
+            <div class="stat-label">Efficiency of modern PEM<br>electrolyzers</div>
+        </div>
+    </div>
+
+<!-- Benefits section -->
     <div class="section">
         <h1 class="slide-in slide-in-up">KEY BENEFITS</h1>
         <ul>
@@ -43,6 +71,7 @@
         </ul>
     </div>
 
+<!-- How is Green Hydrogen Produced? -->
     <div class="container">
         <img src="https://technetics.com/wp-content/uploads/2022/12/Green-Hydrogen.jpg" alt="Green Hydrogen infographic">
         <div class="text-content">
@@ -54,6 +83,7 @@
         </div>
     </div>
 
+<!-- Challenges section -->
     <div class="container">
         <div class="text-content">
             <h2 class="slide-in slide-in-left">What are the Challenges of Green Hydrogen?</h2>
@@ -67,6 +97,7 @@
         <img src="https://www.epa.gov/system/files/styles/large/private/images/2024-04/what-is-gp-image-1.png?itok=9LJR4DGL" alt="Green Hydrogen challenges infographic">
     </div>
 
+<!-- Technology pipeline section -->
     <div class="section">
         <h1 class="slide-in slide-in-up">Technology</h1>
         <ul class="slide-in slide-in-up">
@@ -87,5 +118,11 @@
             <li>Will need API to scrub from shopping platforms</li>
         </ul>
     </header>
+
+<!-- Footer -->
+    <footer>
+        <div class="footer-logo">Project Evergreen</div>
+        <div class="footer-note">An educational resource on green hydrogen technology.</div>
+    </footer>
 </body>
 </html>

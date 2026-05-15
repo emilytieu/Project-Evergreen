@@ -412,7 +412,7 @@ button:active {
 .split {
   display: flex;
   align-items: center;
-  min-height: 80vh;
+  min-height: 100svh;
   width: 100%;
 }
 
@@ -420,13 +420,14 @@ button:active {
 
 .split-img {
   flex: 0 0 50%;
-  height: 80vh;
+  height: 60 svh;
+  width: 60 svh;
   overflow: hidden;
 }
 
 .split-img img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   display: block;
   overflow: hidden;

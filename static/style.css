@@ -192,19 +192,19 @@ button:active {
 
 .hero-eyebrow {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 13px !important;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--blue-deep);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   opacity: 0;
   animation: fadeUp 0.7s 0.1s ease forwards;
 }
 
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
   font-weight: 600;
   line-height: 1.15;
   color: var(--ink);
@@ -359,7 +359,7 @@ button:active {
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 48px;
-  max-width: 520px;
+  /* max-width: 520px; */
 }
 
 .benefits-grid {
@@ -429,6 +429,7 @@ button:active {
   height: 100%;
   object-fit: cover;
   display: block;
+  overflow: hidden;
 }
 
 .split-text {
@@ -490,14 +491,17 @@ button:active {
   padding: 100px 60px;
   background: var(--accent);
   color: var(--white);
+  min-height: 100svh;
+  justify-content: center;
+  align-items: center;
 }
 
 .pipeline .section-eyebrow { color: rgba(255,255,255,0.5); }
-.pipeline .section-title   { color: var(--white); max-width: 600px; }
+.pipeline .section-title   { color: var(--white); }
 
 .pipeline-steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2px;
   margin-top: 48px;
 }

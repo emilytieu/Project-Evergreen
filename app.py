@@ -1,11 +1,27 @@
-from flask import Flask, jsonify, render_template
-import requests
+from flask import Flask, jsonify, render_template, send_from_directory
+import requests, os
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+def serve():
+    return send_from_directory("frontend/dist", "index.html")
+
+@app.route("/<path:path>")
+def static_proxy(path):
+    file_path = os.path.join("frontend/dist", path)
+
+    if os.path.exists(file_path):
+        return send_from_directory("frontend/dist", path)
+
+    return send_from_directory("frontend/dist", "index.html")
+
+@app.route("/build")
+def build():
+    return send_from_directory("frontend/dist", "index.html")
 
 @app.route("/energy")
 def energy():
@@ -35,6 +51,12 @@ def energy_data():
 
     results = list(latest_by_entity.values())
     return jsonify(results)
+
+@app.route("/api/test")
+def test():
+    return jsonify({
+        "message": "Flask backend connected"
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)

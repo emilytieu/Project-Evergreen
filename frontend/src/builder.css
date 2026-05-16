@@ -14,8 +14,8 @@
   --accent:      #1a4a5e;
   --accent-hover:#12364a;
   --ink:         #1e1e1e;
-  --ink-muted:   #5a5650;
-  --ink-faint:   #9a9690;
+  --ink-muted:   #3d3933;
+  --ink-faint:   #524e48;
   --border:      rgba(0,0,0,0.09);
   --border-blue: rgba(44,95,122,0.2);
   --warn-bg:     rgba(180,100,20,0.07);
@@ -540,7 +540,7 @@
 .hb-row-empty {
   font-style: italic;
   font-size: 12px;
-  color: var(--ink-faint);
+  color: var(--blue-deep);
 }
 
 .hb-row-price {

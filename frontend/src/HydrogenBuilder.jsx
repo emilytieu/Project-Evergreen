@@ -73,7 +73,7 @@ function PartCard({ part, onAdd, isSelected }) {
         </div>
       )}
       <div className="hb-card-footer">
-        <span className="hb-expand-hint">{expanded ? "▲ less" : "▼ details"}</span>
+        <span className="hb-expand-hint">{expanded ? "▲ Less" : "▼ Details"}</span>
         <button
           className={`hb-add-btn ${isSelected ? "remove" : "add"}`}
           onClick={e => { e.stopPropagation(); onAdd(part); }}
@@ -90,7 +90,7 @@ function BuildRow({ category, part, onRemove }) {
   return (
     <div className="hb-build-row">
       <div className="hb-row-cat">
-        {category.icon} {category.label}
+        {category.label}
         {category.required && <span className="hb-row-required">*</span>}
       </div>
       {part ? (
@@ -192,7 +192,6 @@ export default function HydrogenBuilder() {
               className={`hb-cat-btn${activeCategory === cat.id ? " active" : ""}`}
               onClick={() => { setActiveCat(cat.id); setSearch(""); setFilterType("all"); }}
             >
-              <span className="hb-cat-btn-icon">{cat.icon}</span>
               <span className="hb-cat-btn-label">{cat.label}</span>
               {build[cat.id]
                 ? <span className="hb-cat-check">✓</span>
@@ -211,7 +210,6 @@ export default function HydrogenBuilder() {
 
         <main className="hb-catalog">
           <div className="hb-section-title">
-            <span>{CATEGORIES.find(c => c.id === activeCategory)?.icon}</span>
             <span>{CATEGORIES.find(c => c.id === activeCategory)?.label}</span>
             <span className="hb-section-count">— {filteredParts.length} parts</span>
           </div>

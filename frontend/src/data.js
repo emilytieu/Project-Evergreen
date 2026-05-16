@@ -1,16 +1,15 @@
-// ── Data ──────────────────────────────────────────────────────────────────────
-const CATEGORIES = [
-  { id: "electrolyzer", label: "Electrolyzer",      icon: "⚗️",  required: true  },
-  { id: "rectifier",   label: "Rectifier / PSU",    icon: "🔌",  required: true  },
-  { id: "storage",     label: "H₂ Storage Tank",    icon: "🫙",  required: true  },
-  { id: "compressor",  label: "Compressor",          icon: "🔧",  required: true  },
-  { id: "purifier",    label: "Purifier / Dryer",    icon: "💧",  required: false },
-  { id: "fuelcell",    label: "Fuel Cell",           icon: "⚡",  required: false },
-  { id: "sensor",      label: "Safety Sensors",      icon: "📡",  required: false },
-  { id: "controller",  label: "System Controller",   icon: "🖥️",  required: false },
+export const CATEGORIES = [
+  { id: "electrolyzer", label: "Electrolyzer",       required: true  },
+  { id: "rectifier",   label: "Rectifier / PSU",     required: true  },
+  { id: "storage",     label: "H₂ Storage Tank",     required: true  },
+  { id: "compressor",  label: "Compressor",          required: true  },
+  { id: "purifier",    label: "Purifier / Dryer",    required: false },
+  { id: "fuelcell",    label: "Fuel Cell",           required: false },
+  { id: "sensor",      label: "Safety Sensors",      required: false },
+  { id: "controller",  label: "System Controller",   required: false },
 ];
 
-const PARTS = [
+export const PARTS = [
   { id: "e1", category: "electrolyzer", name: "ProtonEx PEM-5",       brand: "Proton Energy",      price: 4800,  power_kw: 5,   output_nm3h: 1.0, type: "PEM",      pressure_bar: 35,  weight_kg: 48,  efficiency: 78, tags: ["residential","compact"],        desc: "Compact PEM unit ideal for residential or lab use. Low maintenance, fast startup, produces 99.999% pure H₂." },
   { id: "e2", category: "electrolyzer", name: "AlkaFlex 30",          brand: "HydraTech",          price: 12500, power_kw: 30,  output_nm3h: 6.0, type: "Alkaline", pressure_bar: 30,  weight_kg: 210, efficiency: 72, tags: ["industrial","high-output"],     desc: "Industrial alkaline electrolyzer with proven 20-year lifespan. Lower capex per kW, best for constant-load operations." },
   { id: "e3", category: "electrolyzer", name: "SolidOx SOEC-20",      brand: "Elcogen",            price: 28000, power_kw: 20,  output_nm3h: 5.2, type: "SOEC",     pressure_bar: 15,  weight_kg: 95,  efficiency: 89, tags: ["high-efficiency","industrial"], desc: "Solid oxide electrolyzer operating at 800°C. Highest electrical efficiency available; ideal for waste-heat pairing." },

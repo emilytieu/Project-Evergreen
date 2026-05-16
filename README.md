@@ -20,11 +20,6 @@ A static educational site explaining:
 - Hydrogen storage and fuel cells
 - Sustainability and energy transition topics
 
-Built using:
-- HTML
-- CSS
-- JavaScript
-
 ### 2. Hydrogen System Builder
 An interactive React-based tool allowing users to:
 - Configure hydrogen production systems
@@ -33,10 +28,6 @@ An interactive React-based tool allowing users to:
 - Compare equipment specifications
 - View compatibility warnings
 - Estimate total system cost
-
-Built using:
-- React
-- Vite
 
 ---
 
@@ -131,6 +122,6 @@ http://127.0.0.1:5000
 
 ---
 # Authors
-@emilytieu
-@cstum-operator
+Emily Tieu
+Cameron Stump
 

@@ -172,7 +172,8 @@ export default function HydrogenBuilder() {
   return (
     <div className="hb-root">
       <header className="hb-header">
-        <span className="hb-logo">Project Evergreen — System Builder</span>
+        <a href="/" className="hb-logo" >Project Evergreen</a>
+        <span className="hb-logo-title">HYDROGEN SYSTEM BUILDER</span>
         <div className="hb-header-right">
           {warnings.filter(w => w.severity === "error").length > 0 && (
             <span className="hb-error-badge">

@@ -7,9 +7,17 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
+        host: true,
         target: "https://project-evergreen.onrender.com",
         changeOrigin: true,
       },
     },
+  },
+
+  preview: {
+    host: true,
+    allowedHosts: [
+      "project-evergreen.onrender.com"
+    ],
   },
 });

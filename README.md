@@ -54,7 +54,7 @@ An interactive React-based tool allowing users to:
 git clone <your-repo-url>
 cd project
 ```
----
+
 ## 2. Create the Virtual Environment
 ```bash
 python -m venv venv
@@ -70,12 +70,11 @@ source venv/bin/activate
 ```bash
 venv\Scripts\activate
 ```
----
+
 ## 3. Install Flask
 ```bash
 pip install flask
 ```
----
 ## 4. Install Dependencies
 Move into the frontend directory and install npm packages:
 

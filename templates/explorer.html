@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Explorer — Project Evergreen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/explorer.css">
+    <script src="../static/explorer.js" defer></script>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+    <div class="nav-left">
+        <a href="/" class="nav-logo">Project Evergreen</a>
+        <span class="nav-title">COMPONENT EXPLORER</span>
+    </div>
+    <div class="nav-right">
+        <a href="/builder" class="nav-link">System Builder →</a>
+        <span class="nav-count" id="total-count">{{ total_count }} components</span>
+    </div>
+    </nav>
+    
+    <div class="layout">
+    
+    <!-- ── Filter sidebar ──────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+    
+        <span class="sidebar-label">Category</span>
+        <div class="filter-group" id="cat-filters">
+        <button class="filter-btn active" data-category="all" onclick="setCategory('all', this)">
+            All <span class="filter-count">{{ total_count }}</span>
+        </button>
+        {% for cat in categories %}
+        <button class="filter-btn" data-category="{{ cat }}" onclick="setCategory('{{ cat }}', this)">
+            {{ cat|title }} <span class="filter-count" id="count-{{ cat }}">—</span>
+        </button>
+        {% endfor %}
+        </div>
+    
+        <hr>
+        <span class="sidebar-label">Electrolyzer Type</span>
+        <div class="filter-group" id="type-filters">
+        <button class="filter-btn active" data-type="all" onclick="setType('all', this)">All types</button>
+        {% for t in types %}
+        <button class="filter-btn" data-type="{{ t }}" onclick="setType('{{ t }}', this)">{{ t }}</button>
+        {% endfor %}
+        </div>
+    
+        <hr>
+        <span class="sidebar-label">H₂ Output Range (Nm³/h)</span>
+        <div class="range-row">
+        <label>Min</label>
+        <input type="number" class="range-input" id="min-output" placeholder="0" min="0">
+        </div>
+        <div class="range-row">
+        <label>Max</label>
+        <input type="number" class="range-input" id="max-output" placeholder="any" min="0">
+        </div>
+    
+        <hr>
+        <span class="sidebar-label">Features</span>
+        <div class="toggle-row" onclick="toggleFilter('modular')">
+        <span class="toggle-label">Modular only</span>
+        <div class="toggle" id="toggle-modular"></div>
+        </div>
+        <div class="toggle-row" onclick="toggleFilter('compressor')">
+        <span class="toggle-label">Compressor included</span>
+        <div class="toggle" id="toggle-compressor"></div>
+        </div>
+    
+        <button class="apply-btn" onclick="applyFilters()">APPLY FILTERS</button>
+        <span class="clear-link" onclick="clearFilters()">Clear all filters</span>
+    </aside>
+    
+    <!-- ── Results panel ────────────────────────────────────────────── -->
+    <div class="results-panel">
+        <div class="results-toolbar">
+        <div class="search-row">
+            <input
+            type="text"
+            class="search-input"
+            id="search-input"
+            placeholder="Search by name, brand, country, type…"
+            oninput="debounceSearch()"
+            >
+            <select class="sort-select" id="sort-select" onchange="fetchComponents()">
+            <option value="output_desc">Output ↓</option>
+            <option value="output_asc">Output ↑</option>
+            <option value="efficiency">Efficiency ↓</option>
+            <option value="price_asc">Price ↑</option>
+            <option value="price_desc">Price ↓</option>
+            <option value="name">Name A–Z</option>
+            </select>
+        </div>
+        <div class="results-meta" id="results-meta">Loading…</div>
+        </div>
+        <div class="results-grid" id="results-grid">
+        <!-- populated by JS -->
+        </div>
+    </div>
+    
+    <!-- ── Chat panel ──────────────────────────────────────────────── -->
+    <aside class="chat-panel">
+        <div class="chat-header">
+        <h2>AI Engineering Assistant</h2>
+        <p>Ask about components, trade-offs, compatibility, sizing, or anything hydrogen.</p>
+        </div>
+    
+        <div class="chat-messages" id="chat-messages">
+        <div class="msg assistant">
+            👋 Hi! I'm your hydrogen systems assistant. I can see the components you're currently browsing.<br><br>
+            Try asking me to compare electrolyzers, explain trade-offs, or recommend a component for your use case.
+        </div>
+        </div>
+    
+        <div class="chat-suggestions" id="suggestions">
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">What's the difference between PEM and Alkaline electrolyzers?</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">Which electrolyzer has the best efficiency in the database?</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this)">What output pressure do I need for a 350 bar storage tank?</button>
+        </div>
+    
+        <div class="chat-input-row">
+        <textarea
+            class="chat-input"
+            id="chat-input"
+            placeholder="Ask about these components…"
+            rows="1"
+            onkeydown="chatKeydown(event)"
+            oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendChat()" title="Send">➤</button>
+        </div>
+    </aside>
+    </div>
+</body>
+</html>

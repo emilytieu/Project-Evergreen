@@ -398,9 +398,17 @@
 
     }
     .ask-btn:hover { background: var(--blue-pale); border-color: var(--blue-mid); }
-    .ask-btn:hover .ask-btn { display: none; }
-    .ask-btn .ask-btn-hover { display: none; }
-    .ask-btn:hover .ask-btn-hover { display: inline; }
+    .ask-btn .hover {
+        display: none;
+    }
+
+    .ask-btn:hover .default {
+        display: none;
+    }
+
+    .ask-btn:hover .hover {
+        display: inline;
+    }
  
     /* Expanded detail block */
     .card-detail {

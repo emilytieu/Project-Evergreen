@@ -118,11 +118,11 @@ function renderCard(c) {
     ${detail}
     <div class="card-footer">
       <span class="expand-hint">${isExpanded ? "▲ Less" : "▼ Details"}</span>
-      <button 
-        <span class="ask-btn"> → </span>
-        <span class="ask-btn-hover"> Ask AI about this → </span>
-        onclick="askAbout(event, '${c.id}', '${escAttr(c.name)}')">
-      </button>
+      <button
+        class="ask-btn" onclick="askAbout(event, '${c.id}', '${escAttr(c.name)}')">
+        <span class="default">→</span>
+        <span class="hover">Ask AI about this →</span>
+    </button>
     </div>
   </div>`;
 }

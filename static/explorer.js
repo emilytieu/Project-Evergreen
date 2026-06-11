@@ -117,11 +117,11 @@ function renderCard(c) {
     ${badges ? `<div class="card-badges">${badges}</div>` : ""}
     ${detail}
     <div class="card-footer">
-      <span class="expand-hint">${isExpanded ? "▲ Less" : "▼ Details"}</span>
+      <span class="expand-hint">${isExpanded ? "▲ View less" : "▼ View more"}</span>
       <button
         class="ask-btn" onclick="askAbout(event, '${c.id}', '${escAttr(c.name)}')">
         <span class="default">→</span>
-        <span class="hover">Ask AI about this →</span>
+        <span class="hover">FAQs →</span>
     </button>
     </div>
   </div>`;

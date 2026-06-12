@@ -56,6 +56,18 @@ def _eff(val: str):
     if m: return float(m.group(1))
     n = _first_num(s)
     return n if n and 0 < n <= 100 else None
+
+def _temp_min(value: str):
+    nums = re.findall(r"-?\d+(?:\.\d+)?", str(value))
+    return float(nums[0]) if nums else None
+
+def _temp_max(value: str):
+    nums = re.findall(r"-?\d+(?:\.\d+)?", str(value))
+    return float(nums[1]) if len(nums) >= 2 else None
+
+def _signed_percent(value: str):
+    m = re.search(r"[-+]?\d+(?:\.\d+)?", str(value))
+    return float(m.group()) if m else None
  
  
 # ── Category-specific parsers ─────────────────────────────────────────────────
@@ -112,12 +124,165 @@ def parse_electrolyzers(path: Path) -> list[dict]:
             "pressure_raw": _clean(row.get("Hydrogen Output Pressure", "")),
         })
     return records
+
+def parse_solar_panels(path: Path) -> list[dict]:
+    df = pd.read_csv(path, dtype=str).fillna("-")
+
+    records = []
+
+    for idx, row in enumerate(df.to_dict("records")):
+        model = _clean(row.get("Model", ""))
+        series = _clean(row.get("Series", ""))
+
+        if not model:
+            continue
+
+        tech = _clean(row.get("Technology", ""))
+
+        stc_power = _first_num(row.get("STC Maximum Power (Pm) [W]", ""))
+        efficiency = _first_num(row.get("Module Efficiency [%]", ""))
+        bifaciality = _first_num(row.get("Bifaciality", ""))
+
+        tags = []
+
+        # technology tags
+        tech_l = tech.lower()
+
+        if "hjt" in tech_l:
+            tags.append("hjt")
+        elif "perc" in tech_l:
+            tags.append("perc")
+        elif "n type" in tech_l or "n-type" in tech_l:
+            tags.append("n-type")
+
+        if "bifacial" in tech_l:
+            tags.append("bifacial")
+
+        # power class tags
+        if stc_power:
+            if stc_power < 450:
+                tags.append("residential")
+            elif stc_power < 650:
+                tags.append("commercial")
+            else:
+                tags.append("utility-scale")
+
+        # efficiency class
+        if efficiency:
+            if efficiency >= 23:
+                tags.append("high-efficiency")
+            elif efficiency >= 21:
+                tags.append("efficient")
+
+        records.append({
+            "id": f"pv-{idx}",
+            "category": "solar-module",
+
+            # identity
+            "name": f"{series} {model}".strip(),
+            "model": model,
+            "series": series,
+            "technology": tech,
+
+            # electrical @ STC
+            "stc_power_w": stc_power,
+            "stc_vm_v": _first_num(row.get("STC Max Power Voltage (Vm) [V]", "")),
+            "stc_im_a": _first_num(row.get("STC Max Power Current (Im) [A]", "")),
+            "voc_v": _first_num(row.get("STC Open Circuit Voltage (Voc) [V]", "")),
+            "isc_a": _first_num(row.get("STC Short Circuit Current (Isc) [A]", "")),
+            "power_tolerance_w": _clean(row.get("Power Tolerance [W]", "")),
+
+            # efficiency
+            "module_efficiency_pct": efficiency,
+            "bifaciality_pct": bifaciality,
+
+            # NMOT
+            "nmot_power_w": _first_num(row.get("NMOT Maximum Power (Pm) [W]", "")),
+            "nmot_vm_v": _first_num(row.get("NMOT Max Power Voltage (Vm) [V]", "")),
+            "nmot_im_a": _first_num(row.get("NMOT Max Power Current (Im) [A]", "")),
+            "nmot_voc_v": _first_num(row.get("NMOT Open Circuit Voltage (Voc) [V]", "")),
+            "nmot_isc_a": _first_num(row.get("NMOT Short Circuit Current (Isc) [A]", "")),
+
+            # physical
+            "dimensions": _clean(row.get("Dimensions", "")),
+            "weight_kg": _first_num(row.get("Weight", "")),
+            "cells": _clean(row.get("Number of Cells", "")),
+            "front_glass": _clean(row.get("Front Glass", "")),
+            "rear_glass": _clean(row.get("Rear Glass", "")),
+            "frame": _clean(row.get("Frame", "")),
+
+            # electrical / safety
+            "junction_box": _clean(row.get("Junction Box", "")),
+            "connector": _clean(row.get("Connector", "")),
+            "output_cables": _clean(row.get("Output Cables", "")),
+            "max_system_voltage_v": _first_num(
+                row.get("Maximum System Voltage", "")
+            ),
+            "max_series_fuse_a": _first_num(
+                row.get("Maximum Series Fuse Rating", "")
+            ),
+
+            # environmental
+            "temp_min_c": _temp_min(row.get("Operating Temperature", "")),
+            "temp_max_c": _temp_max(row.get("Operating Temperature", "")),
+            "nominal_module_temp_c": _first_num(
+                row.get("Nominal Module Operating Temperature", "")
+            ),
+
+            # temperature coefficients
+            "temp_coeff_pmax_pct_c": _signed_percent(
+                row.get("Temperature Coefficient of Pmax", "")
+            ),
+            "temp_coeff_voc_pct_c": _signed_percent(
+                row.get("Temperature Coefficient of Voc", "")
+            ),
+            "temp_coeff_isc_pct_c": _signed_percent(
+                row.get("Temperature Coefficient of Isc", "")
+            ),
+
+            # mechanical
+            "mechanical_load": _clean(row.get("Mechanical Load", "")),
+            "hail_test": _clean(row.get("Hail Test", "")),
+            "application_rating": _clean(row.get("Application Rating", "")),
+
+            # warranties
+            "product_warranty": _clean(row.get("Product Warranty", "")),
+            "linear_power_warranty": _clean(
+                row.get("Linear Power Output Warranty", "")
+            ),
+
+            # logistics
+            "container": _clean(row.get("Container", "")),
+            "pieces_per_pallet": _first_num(
+                row.get("Pieces per Pallet", "")
+            ),
+            "pieces_per_container": _first_num(
+                row.get("Pieces per Container", "")
+            ),
+
+            # tags
+            "tags": sorted(set(tags)),
+
+            # raw values preserved
+            "stc_power_raw": _clean(
+                row.get("STC Maximum Power (Pm) [W]", "")
+            ),
+            "efficiency_raw": _clean(
+                row.get("Module Efficiency [%]", "")
+            ),
+            "temperature_range_raw": _clean(
+                row.get("Operating Temperature", "")
+            ),
+        })
+
+    return records
  
  
 # Maps CSV filename stem → parser function
 # Add entries here when you add more CSV files.
 CATEGORY_PARSERS = {
     "electrolyzers": parse_electrolyzers,
+    "solar_panels": parse_solar_panels,
     # "rectifiers":  parse_rectifiers,   ← add yours here
     # "compressors": parse_compressors,
     # "storage":     parse_storage,

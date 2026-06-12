@@ -492,7 +492,7 @@ button:active {
   padding: 100px 60px;
   background: var(--accent);
   color: var(--white);
-  min-height: 100svh;
+  min-height: 125svh;
   justify-content: center;
   align-items: center;
 }
@@ -503,7 +503,7 @@ button:active {
 .pipeline-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2px;
+  gap: 4px;
   margin-top: 48px;
 }
 

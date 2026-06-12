@@ -287,7 +287,7 @@
       gap: 12px;
     }
  
-    /* ── Component card ─────────────────────────────────────────────── */
+    /* #region Component card ─────────────────────────────────────────────── */
     .comp-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -442,8 +442,9 @@
       height: 16px;
     }
     @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+    /* #endregion
  
-    /* ── Chat panel ─────────────────────────────────────────────────── */
+    /* #region ── Chat panel ─────────────────────────────────────────────────── */
     .chat-panel {
       border-left: 1px solid var(--border);
       background: var(--bg-sidebar);
@@ -581,6 +582,8 @@
     }
     .send-btn:hover { background: var(--accent-hover); }
     .send-btn:disabled { background: var(--bg-alt); color: var(--ink-faint); cursor: not-allowed; }
+
+    /* #endregion
  
     /* ── Responsive ─────────────────────────────────────────────────── */
     @media (max-width: 1100px) {

@@ -187,6 +187,14 @@ function clearFilters() {
 // #endregion
  
 // #region Chat ──────────────────────────────────────────────────────────────────────
+function toggleChat() {
+  const panel = document.querySelector(".chat-panel");
+  const btn   = document.getElementById("toggle-chat-btn");
+  const isOpen = panel.style.display === "block";
+  panel.style.display = isOpen ? "none" : "block";
+  btn.textContent = isOpen ? "💬" : "×";
+}
+
 function appendMsg(role, text) {
   const box  = document.getElementById("chat-messages");
   const div  = document.createElement("div");

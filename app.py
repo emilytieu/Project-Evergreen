@@ -359,7 +359,7 @@ def _search_components(query="", category="all", sort="name",
     return results
  
  
-# ── AI assistant ──────────────────────────────────────────────────────────────
+# region AI assistant (to be implemented if willing to buy API access)
  
 def _build_component_context(components: list[dict], max_items=20) -> str:
     """Serialise components into a compact text block for the AI prompt."""
@@ -431,8 +431,10 @@ def ask_ai(user_message: str, history: list[dict],
         return response.content[0].text
     except Exception as e:
         return f"⚠ AI error: {e}"
+
+#endregion
     
-# ── Flask routes ─────────────────────────────────────────────────────────────
+# region Flask routes
 
 @app.route("/")
 def index():
@@ -552,6 +554,8 @@ def api_reload():
     """Dev-only: hot-reload CSVs without restarting."""
     load_components()
     return jsonify({"ok": True, "total": len(ALL_COMPONENTS)})
+
+#endregion
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True, threaded=True)

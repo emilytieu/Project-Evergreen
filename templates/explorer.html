@@ -35,7 +35,7 @@
         </button>
         {% for cat in categories %}
         <button class="filter-btn" data-category="{{ cat }}" onclick="setCategory('{{ cat }}', this)">
-            {{ cat|title }} <span class="filter-count" id="count-{{ cat }}">—</span>
+            {{ cat|title }} <span class="filter-count" id="count-{{ cat }}"> {{ count-{{ cat }} }} </span>
         </button>
         {% endfor %}
         </div>

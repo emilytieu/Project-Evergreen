@@ -141,7 +141,7 @@ function toggleCard(id) {
   fetchComponents(); // re-render preserving expand state
 }
  
-// ── Filters ───────────────────────────────────────────────────────────────────
+// #region Filters ───────────────────────────────────────────────────────────────────
 function setCategory(cat, btn) {
   state.category = cat;
   document.querySelectorAll("#cat-filters .filter-btn").forEach(b => b.classList.remove("active"));
@@ -183,8 +183,10 @@ function clearFilters() {
   document.querySelectorAll("#type-filters .filter-btn").forEach((b,i) => b.classList.toggle("active", i===0));
   fetchComponents();
 }
+
+// #endregion
  
-// ── Chat ──────────────────────────────────────────────────────────────────────
+// #region Chat ──────────────────────────────────────────────────────────────────────
 function appendMsg(role, text) {
   const box  = document.getElementById("chat-messages");
   const div  = document.createElement("div");
@@ -262,7 +264,9 @@ function autoResize(el) {
   el.style.height = "auto";
   el.style.height = Math.min(el.scrollHeight, 100) + "px";
 }
- 
+
+// #endregion
+
 // ── Utils ─────────────────────────────────────────────────────────────────────
 function escHtml(s) {
   return String(s ?? "")

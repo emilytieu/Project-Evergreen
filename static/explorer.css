@@ -451,8 +451,8 @@
       position: absolute;
       top: calc(var(--nav-h) + 12px);
       right: calc(var(--chat-w) + 12px);
-      width: 36px;
-      height: 36px;
+      width: 24px;
+      height: 24px;
       background: var(--accent);
       border: none;
       border-radius: 8px;
@@ -465,7 +465,7 @@
       justify-content: center;
       transition: background 0.15s, transform 0.15s;
     }
-    .toggle-chat-btn:hover { background: var(--accent-hover); transform: scale(1.1); }
+    .toggle-chat-btn:hover { background: var(--accent-hover); transform: scale(1.05); }
 
     .chat-panel {
       border-left: 1px solid var(--border);

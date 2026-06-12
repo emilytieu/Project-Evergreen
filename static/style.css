@@ -315,7 +315,7 @@ button:active {
 }
 
 .stat-item {
-  padding: 42px 40px;
+  padding: 56px 40px;
   border-right: 1px solid rgba(255,255,255,0.12);
 }
 
@@ -489,7 +489,7 @@ button:active {
 
 /* #region Section: Technology pipeline */
 .pipeline {
-  padding: 100px 60px;
+  padding: 200px 60px;
   background: var(--accent);
   color: var(--white);
   min-height: 125svh;

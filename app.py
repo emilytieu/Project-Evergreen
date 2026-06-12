@@ -11,6 +11,7 @@ DATA_DIR      = Path(os.getenv("DATA_DIR", "./data"))
 ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 AI_MODEL      = "claude-sonnet-4-20250514"
 
+#region Data parser helper functions
 def _first_num(val: str):
     """Extract first numeric value from a messy string."""
     if not val or str(val).strip() in ("-", "", "nan", "?"):
@@ -69,8 +70,9 @@ def _signed_percent(value: str):
     m = re.search(r"[-+]?\d+(?:\.\d+)?", str(value))
     return float(m.group()) if m else None
  
+ #endregion
  
-# ── Category-specific parsers ─────────────────────────────────────────────────
+#region Cateogry specific parsers
  
 def parse_electrolyzers(path: Path) -> list[dict]:
     df = pd.read_csv(path, dtype=str).fillna("-")
@@ -92,7 +94,7 @@ def parse_electrolyzers(path: Path) -> list[dict]:
  
         records.append({
             "id":           f"elz-{idx}",
-            "category":     "electrolyzer",
+            "category":     "Electrolyzers",
             "name":         f"{mfr} {mod}".strip(),
             "brand":        mfr,
             "model":        mod,
@@ -176,7 +178,7 @@ def parse_solar_panels(path: Path) -> list[dict]:
 
         records.append({
             "id": f"pv-{idx}",
-            "category": "solar-module",
+            "category": "Solar Panels",
 
             # identity
             "name": f"{series} {model}".strip(),
@@ -287,7 +289,8 @@ CATEGORY_PARSERS = {
     # "compressors": parse_compressors,
     # "storage":     parse_storage,
 }
- 
+ #endregion
+
 # ── Load all components at startup ────────────────────────────────────────────
  
 ALL_COMPONENTS: list[dict] = []

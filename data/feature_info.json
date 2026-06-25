@@ -1,0 +1,78 @@
+{
+  "features": [
+    "solar_kw",
+    "wind_kw",
+    "total_renewable_kw",
+    "electrolyzer_eff",
+    "operating_hours",
+    "water_availability",
+    "ambient_temp_c",
+    "electricity_price",
+    "elz_type_pem",
+    "elz_type_alkaline",
+    "elz_type_soec",
+    "renewable_x_eff",
+    "solar_fraction"
+  ],
+  "target": "h2_output_kg_day",
+  "elz_types": [
+    "PEM",
+    "Alkaline",
+    "SOEC"
+  ],
+  "metrics": {
+    "mae_kg_day": 98.75,
+    "rmse_kg_day": 391.93,
+    "r2": 0.9149,
+    "mape_pct": 132.58,
+    "cv_r2_mean": 0.9132,
+    "cv_r2_std": 0.0091,
+    "n_train": 34000,
+    "n_test": 6000,
+    "feature_importance": {
+      "renewable_x_eff": 0.3415,
+      "wind_kw": 0.2274,
+      "total_renewable_kw": 0.2122,
+      "operating_hours": 0.107,
+      "solar_kw": 0.0861,
+      "water_availability": 0.0089,
+      "electricity_price": 0.004,
+      "solar_fraction": 0.0039,
+      "electrolyzer_eff": 0.0038,
+      "ambient_temp_c": 0.0022,
+      "elz_type_soec": 0.0014,
+      "elz_type_pem": 0.0014,
+      "elz_type_alkaline": 0.0003
+    }
+  },
+  "input_ranges": {
+    "solar_kw": [
+      0,
+      100000
+    ],
+    "wind_kw": [
+      0,
+      50000
+    ],
+    "electrolyzer_eff": [
+      0.6,
+      0.95
+    ],
+    "operating_hours": [
+      0,
+      24
+    ],
+    "water_availability": [
+      0,
+      1
+    ],
+    "ambient_temp_c": [
+      -30,
+      50
+    ],
+    "electricity_price": [
+      0.01,
+      0.4
+    ]
+  }
+}

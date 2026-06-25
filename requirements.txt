@@ -1,5 +1,8 @@
 flask
 requests
 pandas
-anthropic
 dotenv
+numpy
+joblib
+matplotlib
+scikit-learn

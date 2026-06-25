@@ -357,83 +357,8 @@ def _search_components(query="", category="all", sort="name",
     }
     results.sort(key=key_map.get(sort, key_map["name"]))
     return results
- 
- 
-# region AI assistant (to be implemented if willing to buy API access)
- 
-def _build_component_context(components: list[dict], max_items=20) -> str:
-    """Serialise components into a compact text block for the AI prompt."""
-    lines = []
-    for c in components[:max_items]:
-        parts = [f"[{c['category'].upper()}] {c['name']}"]
-        if c.get("type"):             parts.append(f"Type: {c['type']}")
-        if c.get("output_nm3h"):      parts.append(f"Output: {c['output_nm3h']} Nm³/h")
-        if c.get("power_raw"):        parts.append(f"Power: {c['power_raw']}")
-        if c.get("output_pressure_bar"): parts.append(f"Pressure: {c['output_pressure_bar']} bar")
-        if c.get("efficiency"):       parts.append(f"Efficiency: {c['efficiency']}%")
-        if c.get("purity_pct"):       parts.append(f"Purity: {c['purity_pct']}%")
-        if c.get("price"):            parts.append(f"Price: ${c['price']:,.0f}")
-        if c.get("country"):          parts.append(f"Country: {c['country']}")
-        if c.get("modular"):          parts.append("Modular: yes")
-        if c.get("compressor_included"): parts.append("Compressor included: yes")
-        if c.get("notes"):            parts.append(f"Notes: {c['notes']}")
-        lines.append(" | ".join(parts))
-    if len(components) > max_items:
-        lines.append(f"... and {len(components) - max_items} more components not shown")
-    return "\n".join(lines)
- 
- 
-SYSTEM_PROMPT = """You are an expert hydrogen systems engineering assistant for Project Evergreen, \
-an educational platform about green hydrogen technology.
- 
-You help engineers, researchers, and learners understand, compare, and choose \
-hydrogen system components — electrolyzers, compressors, storage tanks, rectifiers, \
-fuel cells, purifiers, sensors, and controllers.
- 
-You have access to a real component database. When answering:
-- Be specific: reference actual component names, brands, and specs from the database context provided
-- Explain trade-offs clearly (PEM vs Alkaline vs SOEC, modular vs fixed, etc.)
-- Use metric units (Nm³/h, kWh/Nm³, barg) and explain them when helpful
-- Flag important safety or compatibility considerations
-- Keep answers concise but complete — bullet points are fine for comparisons
-- If something isn't in the database, say so clearly
- 
-You are NOT a general chatbot — stay focused on hydrogen system topics."""
- 
- 
-def ask_ai(user_message: str, history: list[dict],
-           component_context: str = "") -> str:
-    """Call Claude with RAG context injected into the system prompt."""
-    try:
-        import anthropic
-        client = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
-    except Exception as e:
-        return f"⚠ Could not initialise AI client: {e}"
- 
-    system = SYSTEM_PROMPT
-    if component_context:
-        system += f"\n\n--- CURRENT DATABASE CONTEXT (visible components) ---\n{component_context}"
- 
-    # Build message list — trim to last 10 turns to stay within context
-    messages = []
-    for turn in history[-10:]:
-        if turn.get("role") in ("user", "assistant") and turn.get("content"):
-            messages.append({"role": turn["role"], "content": turn["content"]})
-    messages.append({"role": "user", "content": user_message})
- 
-    try:
-        response = client.messages.create(
-            model=AI_MODEL,
-            max_tokens=1024,
-            system=system,
-            messages=messages,
-        )
-        return response.content[0].text
-    except Exception as e:
-        return f"⚠ AI error: {e}"
 
-#endregion
-    
+# ==================
 # region Flask routes
 
 @app.route("/")

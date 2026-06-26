@@ -361,6 +361,25 @@ def _search_components(query="", category="all", sort="name",
 
 # ==================
 #region Flask routes
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+def serve():
+    return send_from_directory("frontend/dist", "index.html")
+
+@app.route("/<path:path>")
+
+def static_proxy(path):
+    if path.startswith("api/"):
+        return {"error": "Not found"}, 404
+    
+    file_path = os.path.join("frontend/dist", path)
+
+    if os.path.exists(file_path):
+        return send_from_directory("frontend/dist", path)
+    return send_from_directory("frontend/dist", "index.html")
+
 @app.route("/build")
 def build():
     return send_from_directory("frontend/dist", "index.html")
@@ -442,16 +461,6 @@ def api_reload():
     """Dev-only: hot-reload CSVs without restarting."""
     load_components()
     return jsonify({"ok": True, "total": len(ALL_COMPONENTS)})
-
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
-def serve_react(path):
-    if path.startswith("api/"):
-        return {"error": "Not found"}, 404
-    full_path = os.path.join("frontend/dist", path)
-    if path and os.path.exists(full_path):
-        return send_from_directory("frontend/dist", path)
-    return send_from_directory("frontend/dist", "index.html")
 
 #endregion
 

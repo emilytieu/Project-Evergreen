@@ -369,12 +369,15 @@ def serve():
     return send_from_directory("frontend/dist", "index.html")
 
 @app.route("/<path:path>")
+
 def static_proxy(path):
+    if path.startswith("api/"):
+        return {"error": "Not found"}, 404
+    
     file_path = os.path.join("frontend/dist", path)
 
     if os.path.exists(file_path):
         return send_from_directory("frontend/dist", path)
-
     return send_from_directory("frontend/dist", "index.html")
 
 @app.route("/build")

@@ -13,7 +13,6 @@ const INPUTS = [
     max:     10000,
     step:    10,
     default: 50,
-    icon:    "☀️",
     desc:    "Total installed solar PV capacity",
   },
   {
@@ -24,7 +23,6 @@ const INPUTS = [
     max:     5000,
     step:    5,
     default: 20,
-    icon:    "💨",
     desc:    "Total installed wind turbine capacity",
   },
   {
@@ -35,7 +33,6 @@ const INPUTS = [
     max:     95,
     step:    1,
     default: 78,
-    icon:    "⚗️",
     desc:    "Stack electrical-to-hydrogen efficiency",
     isPercent: true,   // send as /100 to API
   },
@@ -47,7 +44,6 @@ const INPUTS = [
     max:     24,
     step:    0.5,
     default: 18,
-    icon:    "🕐",
     desc:    "Hours per day the electrolyzer runs",
   },
   {
@@ -58,7 +54,6 @@ const INPUTS = [
     max:     100,
     step:    5,
     default: 90,
-    icon:    "💧",
     desc:    "Relative feedwater supply (100 = fully available)",
     isPercent: true,
   },
@@ -70,7 +65,6 @@ const INPUTS = [
     max:     50,
     step:    1,
     default: 22,
-    icon:    "🌡️",
     desc:    "Site ambient temperature",
   },
   {
@@ -81,7 +75,6 @@ const INPUTS = [
     max:     0.40,
     step:    0.01,
     default: 0.08,
-    icon:    "⚡",
     desc:    "Governs grid supplement and curtailment decisions",
   },
 ];
@@ -385,7 +378,6 @@ export default function Predictor({ buildComponents = {} }) {
             return (
               <div key={inp.key} className="pr-input-row">
                 <div className="pr-input-meta">
-                  <span className="pr-input-icon">{inp.icon}</span>
                   <div>
                     <div className="pr-input-label">{inp.label}</div>
                     <div className="pr-input-desc">{inp.desc}</div>

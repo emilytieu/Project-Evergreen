@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HydrogenBuilder />} />
+        <Route path="/build" element={<HydrogenBuilder />} />
         <Route path="/predictor" element={<Predictor />} />
       </Routes>
     </BrowserRouter>

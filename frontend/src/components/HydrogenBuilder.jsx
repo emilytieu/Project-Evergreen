@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import "./builder.css";
-import { PARTS, CATEGORIES } from "./data";
+import { PARTS, CATEGORIES } from "../data";
 
 // ── Compatibility checks ───────────────────────────────────────────────────────
 function getCompatibilityWarnings(build) {

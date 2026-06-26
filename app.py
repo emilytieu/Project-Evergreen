@@ -12,7 +12,7 @@ ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 AI_MODEL      = "claude-sonnet-4-20250514"
 
 from backend.ml_api import ml_bp
-app.register_blueprint(ml_bp)
+app.register_blueprint(ml_bp, url_prefix="/api/ml")
 
 #region Data parser helper functions
 def _first_num(val: str):

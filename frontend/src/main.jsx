@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import HydrogenBuilder from "./HydrogenBuilder";
-import Predictor from "./Predictor";
+import Predictor from "./Predictor.jsx";
 import "./builder.css";
 import "./predictor.css";
 

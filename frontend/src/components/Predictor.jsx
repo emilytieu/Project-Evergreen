@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import "./Predictor.css";
+import "./predictor.css";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 const API_BASE = "/api/ml";
@@ -216,7 +216,7 @@ function MiniChart({ points, sweepLabel, loading }) {
   );
 }
 
-// ── Main component ────────────────────────────────────────────────────────────
+// ── Main ────────────────────────────────────────────────────────────
 export default function Predictor({ buildComponents = {} }) {
   // Prefill electrolyzer efficiency from build if available
   const buildElzEff = buildComponents?.electrolyzer?.efficiency ?? null;

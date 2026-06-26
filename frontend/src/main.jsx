@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import HydrogenBuilder from "./HydrogenBuilder";
-import Predictor from "./Predictor";
-import "./builder.css";
-import "./predictor.css";
+import HydrogenBuilder from "./components/HydrogenBuilder.jsx";
+import Predictor from "./components/Predictor.jsx";
+import "./components/builder.css";
+import "./components/predictor.css";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(

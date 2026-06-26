@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import "./Predictor.css";
+import "./predictor.css";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 const API_BASE = "/api/ml";

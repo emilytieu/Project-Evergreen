@@ -462,6 +462,16 @@ def api_reload():
     load_components()
     return jsonify({"ok": True, "total": len(ALL_COMPONENTS)})
 
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_react(path):
+    if path.startswith("api/"):
+        return {"error": "Not found"}, 404
+    full_path = os.path.join("frontend/dist", path)
+    if path and os.path.exists(full_path):
+        return send_from_directory("frontend/dist", path)
+    return send_from_directory("frontend/dist", "index.html")
+
 #endregion
 
 if __name__ == "__main__":

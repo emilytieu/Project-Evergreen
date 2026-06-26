@@ -11,6 +11,9 @@ DATA_DIR      = Path(os.getenv("DATA_DIR", "./data"))
 ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 AI_MODEL      = "claude-sonnet-4-20250514"
 
+from backend.ml_api import ml_bp
+app.register_blueprint(ml_bp)
+
 #region Data parser helper functions
 def _first_num(val: str):
     """Extract first numeric value from a messy string."""
@@ -359,8 +362,7 @@ def _search_components(query="", category="all", sort="name",
     return results
 
 # ==================
-# region Flask routes
-
+#region Flask routes
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -451,27 +453,6 @@ def api_component(comp_id):
     if not match:
         return jsonify({"error": "Not found"}), 404
     return jsonify(match)
- 
- 
-@app.route("/api/chat", methods=["POST"])
-def api_chat():
-    body    = request.json or {}
-    message = body.get("message", "").strip()
-    history = body.get("history", [])
-    # Optional: pass current search state so AI has context of what user is viewing
-    current_query    = body.get("current_query", "")
-    current_category = body.get("current_category", "all")
-    current_sort     = body.get("current_sort", "name")
- 
-    if not message:
-        return jsonify({"error": "Empty message"}), 400
- 
-    # Build context from currently visible components
-    visible = _search_components(current_query, current_category, current_sort)
-    context = _build_component_context(visible, max_items=25)
- 
-    reply = ask_ai(message, history, context)
-    return jsonify({"reply": reply})
  
  
 @app.route("/api/reload")

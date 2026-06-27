@@ -30,7 +30,7 @@ def _load():
     global model, feature_info
     if MODEL_PATH.exists():
         model = joblib.load(MODEL_PATH)
-        print(f"✅  Model loaded from {MODEL_PATH}")
+        print(f"Model loaded from {MODEL_PATH}")
     else:
         print("⚠  model.pkl not found — run train_model.py first")
     if INFO_PATH.exists():

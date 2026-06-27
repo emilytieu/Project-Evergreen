@@ -545,3 +545,21 @@
   .pr-inputs { border-right: none; border-bottom: 1px solid var(--border); }
   .pr-metrics { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── Status banners ────────────────────────────────────────────────────────── */
+.pr-banner {
+  padding: 14px 24px;
+  font-size: 13px;
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border);
+}
+.pr-banner.info  { background: var(--blue-pale); color: var(--blue-deep); }
+.pr-banner.warn  { background: rgba(180,100,20,0.08); color: #7a4010; border-color: rgba(180,100,20,0.3); }
+.pr-banner.error { background: rgba(160,30,30,0.07); color: #802020; border-color: rgba(160,30,30,0.25); }
+.pr-banner code  {
+  font-family: var(--mono);
+  background: rgba(0,0,0,0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}

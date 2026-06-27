@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import "./predictor.css";
 
-const API_BASE = "/api/ml";
+const API_BASE = "/predictor";
 
 // ── safe fetch — never throws on bad JSON, always returns {ok, status, data, rawText} ──
 async function safeFetch(url, options = {}) {

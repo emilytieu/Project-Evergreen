@@ -438,7 +438,7 @@ button:active {
   padding: 80px 64px;
 }
 
-.split.alt-bg .split-text { background: var(--bg-alt); }
+.split.reverse, .split.alt-bg .split-text { background: var(--bg-alt); }
 .split.blue-bg .split-text { background: var(--blue-soft); }
 
 .split-text h2 {

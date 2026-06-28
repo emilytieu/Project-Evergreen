@@ -3,7 +3,6 @@ import "./predictor.css";
 
 const API_BASE = "/predictor";
 
-// ── safe fetch — never throws on bad JSON, always returns {ok, status, data, rawText} ──
 async function safeFetch(url, options = {}) {
   let res, rawText;
   try {
@@ -17,7 +16,6 @@ async function safeFetch(url, options = {}) {
   try {
     data = JSON.parse(rawText);
   } catch {
-    // Server returned HTML (catch-all served index.html) or a crash page
     const preview = rawText.slice(0, 120).replace(/\n/g, " ");
     return {
       ok: false, status: res.status, data: null, rawText,
@@ -25,7 +23,7 @@ async function safeFetch(url, options = {}) {
         ? `API route ${url} not found (404). Is the ml_bp Blueprint registered in app.py?`
         : res.status >= 500
         ? `Server error ${res.status}. Check Render logs — Flask may have crashed on startup.`
-        : `Expected JSON but got HTML. The /api/ml routes are not registered.\n\nGot: ${preview}`,
+        : `Expected JSON but got HTML. The /predictor routes are not registered.\n\nGot: ${preview}`,
     };
   }
   if (!res.ok) {
@@ -161,12 +159,11 @@ export default function Predictor({ buildComponents = {} }) {
   const [loading, setLoading]           = useState(false);
   const [sweepLoading, setSweepLoading] = useState(false);
   const [error, setError]               = useState(null);
-  const [apiStatus, setApiStatus]       = useState(null); // null | "ok" | "error"
+  const [apiStatus, setApiStatus]       = useState(null);
   const [apiInfo, setApiInfo]           = useState(null);
   const [activeTab, setActiveTab]       = useState("predict");
   const debounceRef = useRef(null);
 
-  // ── Health check on mount ─────────────────────────────────────────────────
   useEffect(() => {
     (async () => {
       const { ok, data, error: err } = await safeFetch(`${API_BASE}/info`);
@@ -250,8 +247,7 @@ export default function Predictor({ buildComponents = {} }) {
     );
     if (apiStatus === "no_model") return (
       <div className="pr-banner warn">
-        <strong>model.pkl not found on server.</strong> Run <code>python train_model.py</code>,
-        commit <code>model.pkl</code> to git, and redeploy.
+        <strong>model.pkl not found on server.</strong>
       </div>
     );
   };

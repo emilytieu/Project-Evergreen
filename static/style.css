@@ -434,6 +434,14 @@ button:active {
   overflow: hidden;
 }
 
+#challenges {
+  width: 60%;
+  height: auto;
+  object-fit: contain;
+  justify-self: center;
+  border-radius: 12px;
+}
+
 .split-text {
   flex: 1;
   padding: 80px 64px;

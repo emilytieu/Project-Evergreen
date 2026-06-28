@@ -47,7 +47,7 @@ def _parse_float(val, default=None):
         return default
 
 
-@ml_bp.route("/predictor", methods=["POST"])
+@ml_bp.route("/predict", methods=["POST"])
 def api_predict():
     """
     POST /predictor

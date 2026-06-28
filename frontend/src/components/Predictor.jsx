@@ -262,10 +262,10 @@ export default function Predictor({ buildComponents = {} }) {
         <div>
           <h2 className="pr-title">H₂ Output Predictor</h2>
           <p className="pr-subtitle">
-            ML model · Gradient Boosting · R² 0.916
+            ML Model · Gradient Boosting · R² 0.916
             {apiInfo && (
               <span style={{marginLeft:10, color: apiInfo.loaded ? "#2c5f7a" : "#a05020"}}>
-                {apiInfo.loaded ? "● Model loaded" : "● Model not loaded"}
+                {apiInfo.loaded ? "● Model Loaded" : "● Model Not Loaded"}
               </span>
             )}
           </p>

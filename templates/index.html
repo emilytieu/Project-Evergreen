@@ -20,9 +20,10 @@
         <ul class="nav-links">
             <!-- The "#" is a placeholder for the actual link to the project page.-->
             <li><a href="#">About</a></li>
-            <li><a href="#">Articles</a></li>
             <li><a href="{{ url_for('explorer') }}">Component Explorer</a></li>
-            <li><a href="#">Learn More →</a></li>
+            <li><a href="{{ url_for('build') }}">Build your Own System</a></li>
+            <li><a href="/predictor">H₂ Output Predictor</a></li>
+            <li><a href="#">Connect Now →</a></li>
         </ul>
     </div>
 
@@ -35,8 +36,8 @@
             <a href="{{ url_for('build') }}">
                 <button class="btn-primary"> Assemble Hydrogen System Now → </button>
             </a>
-            <a href="{{ url_for('index') }}">
-                <button class="btn-ghost">Read Articles</button>
+            <a href="/predictor">
+                <button class="btn-ghost">Predict H₂ Outputs</button>
             </a>
         </div>
         <div class="scroll-hint">

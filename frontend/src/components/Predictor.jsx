@@ -37,13 +37,13 @@ async function safeFetch(url, options = {}) {
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 const INPUTS = [
-  { key: "solar_kw",          label: "Solar Capacity",        unit: "kW",    min: 0,   max: 10000, step: 10,  default: 50,   icon: "☀️",  desc: "Total installed solar PV capacity",                 },
-  { key: "wind_kw",           label: "Wind Capacity",         unit: "kW",    min: 0,   max: 5000,  step: 5,   default: 20,   icon: "💨",  desc: "Total installed wind turbine capacity",             },
-  { key: "electrolyzer_eff",  label: "Electrolyzer Efficiency",unit: "%",    min: 60,  max: 95,    step: 1,   default: 78,   icon: "⚗️",  desc: "Stack electrical-to-hydrogen efficiency", isPercent: true },
-  { key: "operating_hours",   label: "Operating Hours",       unit: "h/day", min: 1,   max: 24,    step: 0.5, default: 18,   icon: "🕐",  desc: "Hours per day the electrolyzer runs",               },
-  { key: "water_availability",label: "Water Availability",    unit: "%",     min: 10,  max: 100,   step: 5,   default: 90,   icon: "💧",  desc: "Relative feedwater supply (100 = fully available)", isPercent: true },
-  { key: "ambient_temp_c",    label: "Ambient Temperature",   unit: "°C",    min: -30, max: 50,    step: 1,   default: 22,   icon: "🌡️",  desc: "Site ambient temperature",                          },
-  { key: "electricity_price", label: "Grid Electricity Price",unit: "$/kWh", min: 0.01,max: 0.40,  step: 0.01,default: 0.08, icon: "⚡",  desc: "Governs grid supplement and curtailment decisions", },
+  { key: "solar_kw",          label: "Solar Capacity",        unit: "kW",    min: 0,   max: 10000, step: 10,  default: 50,  desc: "Total installed solar PV capacity",                 },
+  { key: "wind_kw",           label: "Wind Capacity",         unit: "kW",    min: 0,   max: 5000,  step: 5,   default: 20,  desc: "Total installed wind turbine capacity",             },
+  { key: "electrolyzer_eff",  label: "Electrolyzer Efficiency",unit: "%",    min: 60,  max: 95,    step: 1,   default: 78,  desc: "Stack electrical-to-hydrogen efficiency", isPercent: true },
+  { key: "operating_hours",   label: "Operating Hours",       unit: "h/day", min: 1,   max: 24,    step: 0.5, default: 18,  desc: "Hours per day the electrolyzer runs",               },
+  { key: "water_availability",label: "Water Availability",    unit: "%",     min: 10,  max: 100,   step: 5,   default: 90,   desc: "Relative feedwater supply (100 = fully available)", isPercent: true },
+  { key: "ambient_temp_c",    label: "Ambient Temperature",   unit: "°C",    min: -30, max: 50,    step: 1,   default: 22,   desc: "Site ambient temperature",                          },
+  { key: "electricity_price", label: "Grid Electricity Price",unit: "$/kWh", min: 0.01,max: 0.40,  step: 0.01,default: 0.08, desc: "Governs grid supplement and curtailment decisions", },
 ];
 
 const ELZ_TYPES    = ["PEM", "Alkaline", "SOEC"];
@@ -312,7 +312,6 @@ export default function Predictor({ buildComponents = {} }) {
           {INPUTS.map(inp => (
             <div key={inp.key} className="pr-input-row">
               <div className="pr-input-meta">
-                <span className="pr-input-icon">{inp.icon}</span>
                 <div>
                   <div className="pr-input-label">{inp.label}</div>
                   <div className="pr-input-desc">{inp.desc}</div>

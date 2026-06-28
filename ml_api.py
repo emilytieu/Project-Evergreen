@@ -86,19 +86,17 @@ def api_predict():
     electricity_price  = _parse_float(body.get("electricity_price"), 0.08)
     elz_type           = str(body.get("elz_type", "PEM")).strip()
 
-    # Accept efficiency as fraction (0.78) or percent (78)
     eff_raw = _parse_float(body.get("electrolyzer_eff"), 0.78)
     electrolyzer_eff = eff_raw / 100 if eff_raw > 1 else eff_raw
     electrolyzer_eff = max(0.01, min(1.0, electrolyzer_eff))
 
-    # Main prediction
     result = predict_h2(
         model, solar_kw, wind_kw, electrolyzer_eff,
         operating_hours, water_avail, ambient_temp_c,
         electricity_price, elz_type,
     )
 
-    # ── Sensitivity analysis: ±20% on each input ─────────────────────────────
+    # Sensitivity analysis: ±20% on each input
     base_fv    = build_feature_vector(solar_kw, wind_kw, electrolyzer_eff,
                                       operating_hours, water_avail, ambient_temp_c,
                                       electricity_price, elz_type)
@@ -144,7 +142,7 @@ def api_predict():
 @ml_bp.route("/recommend", methods=["POST"])
 def api_recommend():
     """
-    POST /api/ml/recommend
+    POST /predictor/recommend
     Same inputs as /predict. Returns ranked electrolyzer recommendations
     from the real database, each with predicted daily output and explanations.
     """
@@ -172,7 +170,7 @@ def api_recommend():
 @ml_bp.route("/sweep", methods=["POST"])
 def api_sweep():
     """
-    POST /api/ml/sweep
+    POST /predictor/sweep
     Sweep one parameter across a range, holding others fixed.
     Used for the React sensitivity chart.
 
@@ -237,6 +235,6 @@ def api_reload():
 #%% Run standalone
 if __name__ == "__main__":
     app = Flask(__name__)
-    app.register_blueprint(ml_bp, url_prefix="/api/ml")
+    app.register_blueprint(ml_bp, url_prefix="/predictor")
     print("Running ML API on http://localhost:5002")
     app.run(debug=True, port=5002)

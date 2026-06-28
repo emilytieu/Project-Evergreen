@@ -41,6 +41,7 @@ ul{
   margin-top: 5px;
   margin-left: 20px;
 }
+
 /* #region Nav Links */
 .logo{
   font-family: var(--serif);
@@ -276,7 +277,7 @@ button:active {
 }
 /* #endregion */
 
-/* #region Scroll hint */
+/* #region Scroll arrow */
 .scroll-hint {
   position: absolute;
   bottom: 32px;
@@ -337,7 +338,7 @@ button:active {
 }
 /* #endregion */
 
-/* #region Section: Benefits */
+/* #region Benefits */
 .benefits {
   padding: 100px 60px;
   max-width: 1200px;
@@ -408,7 +409,7 @@ button:active {
 }
 /* #endregion */
 
-/* #region Section: Split (how it's made / challenges) */
+/* #region Split (how it's made / challenges) */
 .split {
   display: flex;
   align-items: center;
@@ -455,7 +456,9 @@ button:active {
   margin-bottom: 16px;
   line-height: 1.75;
 }
+/* #endregion */
 
+/* #region Challenge List */
 .challenge-list {
   list-style: none;
   margin-top: 20px;
@@ -487,7 +490,7 @@ button:active {
 }
 /* #endregion */
 
-/* #region Section: Technology pipeline */
+/* #region Technology pipeline */
 .pipeline {
   padding: 200px 60px;
   background: var(--accent);
@@ -592,7 +595,7 @@ footer {
 .slide-in:nth-child(5) { transition-delay: 0.4s; }
 /* #endregion */
 
-/* ── Keyframes ──────────────────────────────────────── */
+/* #region Keyframes */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -606,8 +609,9 @@ footer {
   0%, 100% { transform: rotate(45deg) translateY(0); }
   50%       { transform: rotate(45deg) translateY(5px); }
 }
+/* #endregion */
 
-/* ── Responsive ─────────────────────────────────────── */
+/* #region Responsive */
 @media (max-width: 768px) {
   .split, .split.reverse { flex-direction: column; }
   .split-img { flex: none; height: 45vw; width: 100%; }

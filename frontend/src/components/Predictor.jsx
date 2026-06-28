@@ -254,22 +254,6 @@ export default function Predictor({ buildComponents = {} }) {
         commit <code>model.pkl</code> to git, and redeploy.
       </div>
     );
-    // apiStatus === "error"
-    return (
-      <div className="pr-banner error">
-        <strong>Cannot reach /api/ml/info</strong>
-        <p style={{marginTop:6, fontFamily:"monospace", fontSize:12, whiteSpace:"pre-wrap"}}>{error}</p>
-        <p style={{marginTop:8, fontSize:12}}>
-          <strong>Checklist:</strong><br/>
-          1. <code>ml_api.py</code> is in the same folder as <code>app.py</code><br/>
-          2. <code>app.py</code> has <code>from ml_api import ml_bp</code> and
-             <code>app.register_blueprint(ml_bp, url_prefix="/api/ml")</code><br/>
-          3. Blueprint is registered <em>before</em> the catch-all route<br/>
-          4. <code>model.pkl</code> is committed and deployed<br/>
-          5. Check Render logs for a Python ImportError on startup
-        </p>
-      </div>
-    );
   };
 
   return (
